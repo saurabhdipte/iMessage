@@ -15,7 +15,7 @@ const publicDir = path.join(process.cwd(), "public");
 
 // middleware
 app.use(express.json());
-app.use(cors({origin:FRONTEND_URL, credentials:true}));
+app.use(cors({ origin: FRONTEND_URL || "*", credentials: true }));
 app.use(clerkMiddleware());
 
 if (!fs.existsSync(publicDir)) {
