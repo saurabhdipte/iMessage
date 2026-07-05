@@ -18,6 +18,10 @@ app.use(express.json());
 app.use(cors({ origin: FRONTEND_URL || "*", credentials: true }));
 app.use(clerkMiddleware());
 
+app.get("/health", (req, res) => {
+    res.status(200).json({ ok:true });
+});
+
 if (fs.existsSync(publicDir)) {
   app.use(express.static(publicDir));
 
@@ -29,5 +33,5 @@ if (fs.existsSync(publicDir)) {
 app.listen(PORT, () =>  {
     connectDB();
     console.log("Server is up and running on port" , PORT);
-    
+    if (process.env.FRONTEND_URL === "production") job.start();
 });
